@@ -13,7 +13,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder 
+@Builder
+@Table(name = "FlashcardSet")
 public class Set {
     @Id
     private Long id;
