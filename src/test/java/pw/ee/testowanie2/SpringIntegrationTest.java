@@ -3,7 +3,6 @@ package pw.ee.testowanie2;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pw.ee.testowanie2.Testowanie2Application;
 import pw.ee.testowanie2.repositories.FlashcardRepository;
 import pw.ee.testowanie2.repositories.SetRepository;
 
@@ -27,7 +26,7 @@ public class SpringIntegrationTest {
     protected SetRepository setRepository;
 
     @Autowired
-    FlashcardRepository flashcardRepository;
+    protected FlashcardRepository flashcardRepository;
 
     private Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
@@ -53,8 +52,35 @@ public class SpringIntegrationTest {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(SERVER_URL + url))
-                .headers("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(bodyJSON))
+                .build();
+
+        try {
+            latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            throw new IOException();
+        }
+    }
+
+    void executeDelete(String url) throws IOException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(SERVER_URL + url))
+                .DELETE()
+                .build();
+
+        try {
+            latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            throw new IOException();
+        }
+    }
+
+    void executeUpdate(String url) throws IOException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(SERVER_URL + url))
+                .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
                 .build();
 
         try {
