@@ -3,7 +3,6 @@ package pw.ee.testowanie2;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pw.ee.testowanie2.repositories.FlashcardRepository;
 import pw.ee.testowanie2.repositories.SetRepository;
 
 import java.io.IOException;
@@ -24,9 +23,6 @@ public class SpringIntegrationTest {
     
     @Autowired
     protected SetRepository setRepository;
-
-    @Autowired
-    protected FlashcardRepository flashcardRepository;
     
     private Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
@@ -55,6 +51,34 @@ public class SpringIntegrationTest {
             .POST(HttpRequest.BodyPublishers.ofString(bodyJSON))
             .build();
         
+        try {
+            latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            throw new IOException();
+        }
+    }
+
+    void executeDelete(String url) throws IOException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(SERVER_URL + url))
+            .DELETE()
+            .build();
+
+        try {
+            latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            throw new IOException();
+        }
+    }
+
+    void executeUpdate(String url) throws IOException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(SERVER_URL + url))
+            .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
+            .build();
+
         try {
             latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
