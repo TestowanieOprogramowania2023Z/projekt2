@@ -96,11 +96,6 @@ public class SetOperationsStepDefs extends SpringIntegrationTest {
         executeGet(arg0 + longName);
     }
 
-    @Then("the response status code should be {int}")
-    public void theResponseStatusCodeShouldBe(int arg0) {
-        assertEquals(arg0, latestResponse.statusCode());
-    }
-
     @And("the response body should contain a set with name {string}")
     public void theResponseBodyShouldContainASetWithName(String name) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
