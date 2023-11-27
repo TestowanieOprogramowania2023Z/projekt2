@@ -19,28 +19,28 @@ import java.util.Map;
 public class SpringIntegrationTest {
     static HttpResponse<String> latestResponse;
     final String SERVER_URL = "http://localhost:8080/";
-    
+
     String bodyJSON = "";
-    
+
     @Autowired
     protected SetRepository setRepository;
 
     @Autowired
     protected FlashcardRepository flashcardRepository;
-    
+
     private Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        
+
         return headers;
     }
 
     void executeGet(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(SERVER_URL + url))
-            .build();
-        
+                .uri(URI.create(SERVER_URL + url))
+                .build();
+
         try {
             latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
@@ -51,10 +51,10 @@ public class SpringIntegrationTest {
     void executePost(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(SERVER_URL + url))
-            .POST(HttpRequest.BodyPublishers.ofString(bodyJSON))
-            .build();
-        
+                .uri(URI.create(SERVER_URL + url))
+                .POST(HttpRequest.BodyPublishers.ofString(bodyJSON))
+                .build();
+
         try {
             latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
@@ -65,9 +65,9 @@ public class SpringIntegrationTest {
     void executeDelete(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(SERVER_URL + url))
-            .DELETE()
-            .build();
+                .uri(URI.create(SERVER_URL + url))
+                .DELETE()
+                .build();
 
         try {
             latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -79,23 +79,9 @@ public class SpringIntegrationTest {
     void executePut(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(SERVER_URL + url))
-            .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
-            .build();
-
-        try {
-            latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            throw new IOException();
-        }
-    }
-
-    void executePut(String url) throws IOException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(SERVER_URL + url))
-            .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
-            .build();
+                .uri(URI.create(SERVER_URL + url))
+                .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
+                .build();
 
         try {
             latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());

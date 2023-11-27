@@ -19,13 +19,13 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
 
     @Given("There is an existing Flashcard with the specified id of {int}")
     public void thereIsAnExistingFlashcardWithIdOf(int arg0) {
-      if (!flashcardRepository.existsById((long) arg0)) {
-        Flashcard flashcardEntity = Flashcard.builder()
-            .id((long) arg0)
-            .build();
-        flashcardRepository.save(flashcardEntity);
+        if (!flashcardRepository.existsById((long) arg0)) {
+            Flashcard flashcardEntity = Flashcard.builder()
+                    .id((long) arg0)
+                    .build();
+            flashcardRepository.save(flashcardEntity);
+        }
     }
-
     @When("User makes a DELETE request to {string}")
     public void userMakesAGETRequestTo(String arg0) throws IOException {
         executeDelete(arg0);
