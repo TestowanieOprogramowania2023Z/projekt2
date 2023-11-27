@@ -1,6 +1,7 @@
 package pw.ee.testowanie2;
 
 import com.google.gson.Gson;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +11,7 @@ import pw.ee.testowanie2.models.SetCreateDTO;
 import pw.ee.testowanie2.models.SetDTO;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -70,4 +72,36 @@ public class SetOperationsStepDefs extends SpringIntegrationTest {
         SetDTO set = gson.fromJson(latestResponse.body(), SetDTO.class);
         assertEquals(arg0, set.getId());
     }
+
+    @And("The response status code should be {string}")
+    public void theResponseStatusCodeShouldBe(String arg0) {
+        assertEquals(Integer.parseInt(arg0), latestResponse.statusCode());
+    }
+
+    @Given("I have a set with id {string} with name {string}")
+    public void iHaveASetWithIdWithName(String arg0, String arg1) {
+        Set setEntity =  Set.builder()
+                .id(Long.parseLong(arg0))
+                .name(arg1)
+                .build();
+        setRepository.save(setEntity);
+    }
+
+    @When("I update the set with id {string} with the name {string}")
+    public void iUpdateTheSetWithIdWithTheName(String arg0, String arg1) throws IOException {
+        SetDTO setEntity =  SetDTO.builder()
+                .id(Long.parseLong(arg0))
+                .name(arg1)
+                .build();
+        Gson gson = new Gson();
+        bodyJSON = gson.toJson(setEntity);
+        executePut("/sets/" + arg0);
+    }
+
+    @Then("I should have a set with id {string} with the name {string}")
+    public void iShouldHaveASetWithIdWithTheName(String arg0, String arg1) {
+        Set set = setRepository.findById(Long.parseLong(arg0)).get();
+        assertEquals(arg1, set.getName());
+    }
+
 }

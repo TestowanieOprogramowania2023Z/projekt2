@@ -89,4 +89,18 @@ public class SpringIntegrationTest {
             throw new IOException();
         }
     }
+
+    void executePut(String url) throws IOException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(SERVER_URL + url))
+            .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
+            .build();
+
+        try {
+            latestResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            throw new IOException();
+        }
+    }
 }
