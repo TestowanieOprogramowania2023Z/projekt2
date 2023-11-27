@@ -76,7 +76,7 @@ public class SpringIntegrationTest {
         }
     }
 
-    void executeUpdate(String url) throws IOException {
+    void executePut(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(SERVER_URL + url))
