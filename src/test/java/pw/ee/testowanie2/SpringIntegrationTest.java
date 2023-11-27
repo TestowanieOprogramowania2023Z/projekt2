@@ -3,6 +3,7 @@ package pw.ee.testowanie2;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pw.ee.testowanie2.repositories.FlashcardRepository;
 import pw.ee.testowanie2.repositories.SetRepository;
 
 import java.io.IOException;
@@ -23,6 +24,9 @@ public class SpringIntegrationTest {
     
     @Autowired
     protected SetRepository setRepository;
+
+    @Autowired
+    protected FlashcardRepository flashcardRepository;
     
     private Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();

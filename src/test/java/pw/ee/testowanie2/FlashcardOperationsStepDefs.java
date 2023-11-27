@@ -2,6 +2,8 @@ package pw.ee.testowanie2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.google.gson.Gson;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,6 +11,8 @@ import io.cucumber.java.en.When;
 import java.io.IOException;
 
 import pw.ee.testowanie2.models.Flashcard;
+import pw.ee.testowanie2.models.FlashcardDTO;
+import pw.ee.testowanie2.models.Set;
 
 public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
 
