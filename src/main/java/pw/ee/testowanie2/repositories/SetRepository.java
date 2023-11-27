@@ -3,7 +3,6 @@ package pw.ee.testowanie2.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import pw.ee.testowanie2.models.Set;
-
 import java.util.List;
 import java.util.Optional;
 
