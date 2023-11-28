@@ -128,4 +128,73 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
             flashcardRepository.deleteById(Long.parseLong(arg0));
         }
     }
+
+    @Given("there is a set which id is {int} and name of {string}")
+    public void thereIsASetWhichIdIsAndNameOf(int arg0, String arg1) {
+
+        if (!setRepository.existsById((long) arg0)) {
+            Set setEntity = Set.builder()
+                    .id((long) arg0)
+                    .name(arg1)
+                    .build();
+            setRepository.save(setEntity);
+        }
+    }
+
+    @When("User provides a flashcard with contents of front {string}, back {string}, setid of {int}")
+    public void userProvidesAFlashcardWithContentsOfFrontBackSetIdOf(String arg0, String arg1, int arg2) {
+        FlashcardCreateDTO flashcardCreateDTO = FlashcardCreateDTO.builder()
+                .front(arg0)
+                .back(arg1)
+                .setId((long) arg2)
+                .build();
+        Gson gson = new Gson();
+        bodyJSON = gson.toJson(flashcardCreateDTO);
+    }
+
+    @And("User send POST request to {string}")
+    public void userSendPostRequestTo(String string) throws IOException {
+        executePost(string);
+    }
+    @Then("User gets a status code {int}")
+    public void userGetsAStatusCode(Integer int1) {
+        assertEquals(int1, latestResponse.statusCode());
+    }
+
+    @Given("there is no set of id {int}")
+    public void thereIsNoSetOfId(int arg0) {
+        if (setRepository.existsById((long) arg0)) {
+            setRepository.deleteById((long) (arg0));
+        }
+    }
+
+    @When("User provides a flashcard with contents of back {string}, setid of {int}")
+    public void userProvidesAFlashcardWithContentsOfBackSetidOf(String arg0, int arg1) {
+        FlashcardCreateDTO flashcardCreateDTO = FlashcardCreateDTO.builder()
+                .back(arg0)
+                .setId((long) arg1)
+                .build();
+        Gson gson = new Gson();
+        bodyJSON = gson.toJson(flashcardCreateDTO);
+    }
+
+    @When("User provides a flashcard with contents of front {string}, setid of {int}")
+    public void userProvidesAFlashcardWithContentsOfFrontSetidOf(String arg0, int arg1) {
+        FlashcardCreateDTO flashcardCreateDTO = FlashcardCreateDTO.builder()
+                .back(arg0)
+                .setId((long) arg1)
+                .build();
+        Gson gson = new Gson();
+        bodyJSON = gson.toJson(flashcardCreateDTO);
+    }
+
+    @Given("there is a set which id is {int}")
+    public void thereIsASetWhichIdIs(int arg0) {
+        if (!setRepository.existsById((long) arg0)) {
+            Set setEntity = Set.builder()
+                    .id((long) arg0)
+                    .build();
+            setRepository.save(setEntity);
+        }
+    }
 }
