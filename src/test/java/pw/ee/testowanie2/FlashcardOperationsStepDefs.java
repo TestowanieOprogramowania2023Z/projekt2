@@ -156,10 +156,6 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
     public void userSendPostRequestTo(String string) throws IOException {
         executePost(string);
     }
-    @Then("User gets a status code {int}")
-    public void userGetsAStatusCode(Integer int1) {
-        assertEquals(int1, latestResponse.statusCode());
-    }
 
     @Given("there is no set of id {int}")
     public void thereIsNoSetOfId(int arg0) {
