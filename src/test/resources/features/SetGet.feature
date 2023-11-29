@@ -6,7 +6,7 @@ Feature: Managing Sets in the Web Service
     Then the response status should be 200
     And the response body should contain a set with name "newSet"
 
-  Scenario: Retrieving a set by name, which is not blank
+  Scenario: Retrieving a set by name, which is blank
     When User makes a GET request to "sets/byName/"
     Then the response status should be 404
 

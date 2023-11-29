@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -17,9 +18,11 @@ import java.util.List;
 @Table(name = "FlashcardSet")
 public class Set {
     @Id
+    @GeneratedValue
     private Long id;
     @Column(unique = true)
     private String name;
+    @CreationTimestamp
     private Date createdAt;
     @OneToMany(mappedBy = "set")
     private List<Flashcard> flashcards;
