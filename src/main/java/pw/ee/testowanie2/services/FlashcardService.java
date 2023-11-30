@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pw.ee.testowanie2.models.Flashcard;
+import pw.ee.testowanie2.models.FlashcardCreateDTO;
 import pw.ee.testowanie2.models.FlashcardDTO;
 import pw.ee.testowanie2.repositories.FlashcardRepository;
 import pw.ee.testowanie2.repositories.SetRepository;
