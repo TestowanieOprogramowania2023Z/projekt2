@@ -63,19 +63,19 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
 
     @Given("there is a set with the name {string}")
     public void thereIsASetWithTheName(String arg0) {
-        setRepository.save(Set.builder()
+        Set savedSet = setRepository.save(Set.builder()
                 .name(arg0)
                 .build());
     }
 
     @And("there are flashcards in the set with the name {string}")
     public void thereAreFlashcardsInTheSetWithTheName(String arg0) {
-        flashcardRepository.save(Flashcard.builder()
+        Flashcard savedFlashcard = flashcardRepository.save(Flashcard.builder()
                 .back("question")
                 .front("answer")
                 .set(setRepository.findByName(arg0).get())
                 .build());
-        flashcardRepository.save(Flashcard.builder()
+        Flashcard savedFlashcard2 = flashcardRepository.save(Flashcard.builder()
                 .back("question2")
                 .front("answer2")
                 .set(setRepository.findByName(arg0).get())
@@ -84,7 +84,7 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
 
     @When("the user requests all flashcards from the set with the name {string}")
     public void theUserRequestsAllFlashcardsFromTheSetWithTheName(String arg0) throws IOException {
-        executeGet("/flashcards/by-set-name/" + arg0);
+        executeGet("flashcards/by-set-name/" + arg0);
     }
 
     @Then("the user gets all flashcards from the set with the name {string}")
@@ -112,7 +112,7 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
 
     @When("the user requests the flashcard with the id {string}")
     public void theUserRequestsTheFlashcardWithTheId(String arg0) throws IOException {
-        executeGet("/flashcards/" + arg0);
+        executeGet("flashcards/" + arg0);
     }
 
     @Then("the user gets the flashcard with the id {string}")
