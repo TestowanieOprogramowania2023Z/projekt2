@@ -2,6 +2,7 @@ package pw.ee.testowanie2;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)

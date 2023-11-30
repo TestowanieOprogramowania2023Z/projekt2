@@ -1,4 +1,4 @@
-Feature: Managing Sets in the Web Service
+Feature: User updates a set 
   Scenario: User updates a set by id
     Given I have a set with id "1" with name "Not Set 1"
     When I update the set with id "1" with the name "Set 1"
@@ -6,6 +6,6 @@ Feature: Managing Sets in the Web Service
     And The response status code should be "200"
 
   Scenario: User updates a set by non existing id
-    Given I have a set with id "1" with name "Set 1"
+    Given The set with id of 2 does not exist 
     When I update the set with id "2" with the name "Set 1"
     Then The response status code should be "404"

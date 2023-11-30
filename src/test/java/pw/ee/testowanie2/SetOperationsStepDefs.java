@@ -272,4 +272,11 @@ public class SetOperationsStepDefs extends SpringIntegrationTest {
         Set set = setRepository.findById(Long.parseLong(arg0)).get();
         assertEquals(arg1, set.getName());
     }
+
+    @Given("The set with id of {int} does not exist")
+    public void theSetWithIdOfDoesNotExist(int arg0) {
+        if (setRepository.existsById((long) arg0)) {
+            setRepository.deleteById((long) arg0);
+        }
+    }
 }

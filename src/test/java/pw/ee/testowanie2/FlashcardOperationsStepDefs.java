@@ -101,11 +101,14 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
         assertEquals(arg0, latestResponse.statusCode());
     }
 
-    @Given("there is a flashcard with the id {string}")
-    public void thereIsAFlashcardWithTheId(String arg0) {
-        flashcardRepository.save(Flashcard.builder()
-                .id(Long.parseLong(arg0))
-                .build());
+    @Given("there is a flashcard with the id {int}")
+    public void thereIsAFlashcardWithTheId(int arg0) {
+        if (!flashcardRepository.existsById((long) (arg0))) {
+            Flashcard flashcardEntity = Flashcard.builder()
+                    .id((long) arg0)
+                    .build();
+            flashcardRepository.save(flashcardEntity);
+        }
     }
 
     @When("the user requests the flashcard with the id {string}")
