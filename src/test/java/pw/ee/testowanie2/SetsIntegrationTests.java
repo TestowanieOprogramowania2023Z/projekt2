@@ -10,5 +10,5 @@ import org.junit.runner.RunWith;
         glue = "pw.ee.testowanie2",
         plugin = {"json:target/cucumber.json"}
 )
-public class SetsIntegrationTests {
+public class SetsIntegrationTest {
 }
