@@ -1,11 +1,14 @@
 package pw.ee.testowanie2.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pw.ee.testowanie2.models.SetCreateDTO;
 import pw.ee.testowanie2.models.SetDTO;
 import pw.ee.testowanie2.services.SetService;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,11 @@ import java.util.List;
 public class SetController {
     private final SetService setService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SetDTO> getSetById(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(setService.getSetById(id));
+    }
+    
     @GetMapping("/byName/{name}")
     public ResponseEntity<SetDTO> getSetByName(@PathVariable(name = "name") String name) {
         try{
@@ -53,5 +61,10 @@ public class SetController {
     @PutMapping("/{id}")
     public ResponseEntity<SetDTO> updateSet(@PathVariable(name = "id") Long id, @RequestBody SetDTO setDTO) {
         return ResponseEntity.ok(setService.updateSet(id, setDTO));
+    }
+    
+    @PostMapping("")
+    public ResponseEntity<Long> createSet(@RequestBody @Valid SetCreateDTO setDTO) {
+        return ResponseEntity.created(URI.create(setService.createSet(setDTO).toString())).build();
     }
 }
