@@ -17,6 +17,11 @@ import java.util.List;
 public class SetController {
     private final SetService setService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SetDTO> getSetById(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(setService.getSetById(id));
+    }
+    
     @GetMapping("/byName/{name}")
     public ResponseEntity<SetDTO> getSetByName(@PathVariable(name = "name") String name) {
         try{

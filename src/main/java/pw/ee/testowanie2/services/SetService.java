@@ -64,4 +64,11 @@ public class SetService {
         set.setName(setDTO.getName());
         return setRepository.save(set).getId();
     }
+
+    public SetDTO getSetById(Long id) {
+        if (id == null) throw new IllegalArgumentException("Set id cannot be null");
+        Optional<SetDTO> foundSet = setRepository.findById(id).map(SetDTO::fromSet);
+        if (foundSet.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Set not found");
+        return foundSet.get();
+    }
 }
