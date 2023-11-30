@@ -80,9 +80,9 @@ public class SpringIntegrationTest {
     void executePut(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
+                .setHeader("Content-Type", "application/json")
                 .uri(URI.create(SERVER_URL + url))
                 .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
-                .setHeader("Content-Type", "application/json")
                 .build();
 
         try {

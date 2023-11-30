@@ -27,7 +27,7 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
         }
     }
     @When("User makes a DELETE request to {string}")
-    public void userMakesAGETRequestTo(String arg0) throws IOException {
+    public void userMakesDELETERequestTo(String arg0) throws IOException {
         executeDelete(arg0);
     }
       
@@ -38,14 +38,13 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
       
   @Given("There is no existing Flashcard with the specified id of {int}")
   public void thereIsANoExistingFlashcardWithIdOf(int arg0) {
-    if (!flashcardRepository.existsById((long) arg0)) {
+    if (flashcardRepository.existsById((long) arg0)) {
       flashcardRepository.deleteById((long) arg0);
     }
   }
       
   @When("User provides Flashcard with contents of front {string}, back {string} and set id of {int}")
   public void userProvidesFlashcardWithAllContentsOf(String arg0, String arg1, int arg2){
-    if (flashcardRepository.existsById((long) arg2)) {
       FlashcardCreateDTO flashcardCreateDTO = FlashcardCreateDTO.builder()
           .front(arg0)
           .back(arg1)
@@ -53,7 +52,6 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
           .build();
       Gson gson = new Gson();
       bodyJSON = gson.toJson(flashcardCreateDTO);
-    }
   }
 
   @And("User makes a UPDATE request to {string}")
