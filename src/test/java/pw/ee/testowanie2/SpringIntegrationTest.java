@@ -51,6 +51,7 @@ public class SpringIntegrationTest {
     void executePost(String url) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
+                .setHeader("Content-Type", "application/json")
                 .uri(URI.create(SERVER_URL + url))
                 .POST(HttpRequest.BodyPublishers.ofString(bodyJSON))
                 .build();

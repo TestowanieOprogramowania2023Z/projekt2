@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pw.ee.testowanie2.models.Set;
+import pw.ee.testowanie2.models.SetCreateDTO;
 import pw.ee.testowanie2.models.SetDTO;
 import pw.ee.testowanie2.repositories.SetRepository;
 
@@ -49,5 +50,18 @@ public class SetService {
         Set set = setRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Set not found"));
         set.setName(setDTO.getName());
         return SetDTO.fromSet(setRepository.save(set));
+    }
+    
+    public Long createSet(SetCreateDTO setDTO) {
+        if(setDTO == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Set cannot be null");
+        
+        // check if set with given name already exists
+        if(setRepository.findByName(setDTO.getName()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Set with given name already exists");
+        }
+        
+        Set set = new Set();
+        set.setName(setDTO.getName());
+        return setRepository.save(set).getId();
     }
 }
