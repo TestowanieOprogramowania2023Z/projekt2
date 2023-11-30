@@ -17,4 +17,14 @@ public class FlashcardDTO {
     private String front;
     private Date createdAt;
     private Long setId;
+
+    public static FlashcardDTO fromFlashcard(Flashcard flashcard) {
+        return FlashcardDTO.builder()
+                .id(flashcard.getId())
+                .back(flashcard.getBack())
+                .front(flashcard.getFront())
+                .createdAt(flashcard.getCreatedAt())
+                .build();
+    }
+
 }

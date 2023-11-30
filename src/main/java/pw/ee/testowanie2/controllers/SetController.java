@@ -49,4 +49,9 @@ public class SetController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SetDTO> updateSet(@PathVariable(name = "id") Long id, @RequestBody SetDTO setDTO) {
+        return ResponseEntity.ok(setService.updateSet(id, setDTO));
+    }
 }
