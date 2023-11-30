@@ -27,7 +27,7 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
         }
     }
     @When("User makes a DELETE request to {string}")
-    public void userMakesAGETRequestTo(String arg0) throws IOException {
+    public void userMakesADELETERequestTo(String arg0) throws IOException {
         executeDelete(arg0);
     }
       
