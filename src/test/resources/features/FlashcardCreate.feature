@@ -6,7 +6,7 @@ Feature: User creates a flashcard
     Then The response status should be 201
 
   Scenario: User creates a flashcard assigned to an non-existing set
-    Given there is no set of id 1
+    Given there is no set of id 100
     When User provides a flashcard with contents of front "front", back "back", setid of 100
     And User send POST request to "flashcards"
     Then The response status should be 400

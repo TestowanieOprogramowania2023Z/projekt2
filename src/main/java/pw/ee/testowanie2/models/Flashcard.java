@@ -1,6 +1,7 @@
 package pw.ee.testowanie2.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Date;
 @Builder
 public class Flashcard {
     @Id
+    @GeneratedValue
     private Long id;
     private String back;
     private String front;
