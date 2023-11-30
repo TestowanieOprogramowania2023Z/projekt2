@@ -1,6 +1,7 @@
 package pw.ee.testowanie2.controllers;
 
 import java.util.NoSuchElementException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pw.ee.testowanie2.models.FlashcardCreateDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import pw.ee.testowanie2.models.Flashcard;
 import pw.ee.testowanie2.models.FlashcardDTO;
 import pw.ee.testowanie2.services.FlashcardService;
 
@@ -52,4 +56,13 @@ public class FlashcardController {
         return ResponseEntity.ok("Successfully deleted a flashcard");
     }
 
+    @PostMapping(consumes = {"application/json"})
+    public ResponseEntity<FlashcardDTO> createFlashcard(@Valid @RequestBody FlashcardCreateDTO flashcardCreateDTO) {
+        try {
+            Flashcard flashcard = flashcardService.createFlashcard(flashcardCreateDTO);
+            return new ResponseEntity<>(FlashcardDTO.fromFlashcard(flashcard), HttpStatus.CREATED);
+        } catch (IllegalAccessException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

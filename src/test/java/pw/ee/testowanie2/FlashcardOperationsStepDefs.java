@@ -129,7 +129,6 @@ public class FlashcardOperationsStepDefs extends SpringIntegrationTest {
 
     @Given("there is a set which id is {int} and name of {string}")
     public void thereIsASetWhichIdIsAndNameOf(int arg0, String arg1) {
-
         if (!setRepository.existsById((long) arg0)) {
             Set setEntity = Set.builder()
                     .id((long) arg0)
