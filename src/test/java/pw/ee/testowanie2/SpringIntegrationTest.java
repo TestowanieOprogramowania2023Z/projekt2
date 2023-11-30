@@ -81,6 +81,7 @@ public class SpringIntegrationTest {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(SERVER_URL + url))
                 .PUT(HttpRequest.BodyPublishers.ofString(bodyJSON))
+                .setHeader("Content-Type", "application/json")
                 .build();
 
         try {

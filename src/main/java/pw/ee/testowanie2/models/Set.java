@@ -24,6 +24,6 @@ public class Set {
     private String name;
     @CreationTimestamp
     private Date createdAt;
-    @OneToMany(mappedBy = "set")
+    @OneToMany(mappedBy = "set", fetch=FetchType.EAGER)
     private List<Flashcard> flashcards;
 }

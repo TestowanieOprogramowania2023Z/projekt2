@@ -264,7 +264,7 @@ public class SetOperationsStepDefs extends SpringIntegrationTest {
                 .build();
         Gson gson = new Gson();
         bodyJSON = gson.toJson(setEntity);
-        executePut("/sets/" + arg0);
+        executePut("sets/" + arg0);
     }
 
     @Then("I should have a set with id {string} with the name {string}")
