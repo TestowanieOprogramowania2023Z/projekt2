@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "pw.ee.testowanie2"
+        glue = "pw.ee.testowanie2",
+        plugin = {"json:target/cucumber.json"}
 )
 public class SetsIntegrationTests {
 }
