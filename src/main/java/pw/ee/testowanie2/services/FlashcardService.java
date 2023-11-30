@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FlashcardService {
     private final FlashcardRepository flashcardRepository;
-
+    private final SetRepository setRepository;
     public List<FlashcardDTO> getFlashcardsBySetName(String name) {
         if (name == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Set name cannot be null");
         List<Flashcard> flashcards = flashcardRepository.findBySetName(name);
@@ -31,8 +31,6 @@ public class FlashcardService {
         return FlashcardDTO.fromFlashcard(flashcard);
     }
 
-
-    private final SetRepository setRepository;
     public Flashcard createFlashcard(FlashcardCreateDTO flashcardCreateDTO) throws IllegalAccessException {
         if(!setRepository.existsById(flashcardCreateDTO.getSetId()))
             throw new IllegalAccessException("The set of given id doesnt exist in database");
